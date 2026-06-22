@@ -48,6 +48,13 @@ their browser.
 
 ## Using your own data
 
+Better if you have Letterboxd account:
+1. Letterboxd > Settings > Data > Export Data
+2. Unzip letterboxd_name.zip and take rating.csv
+3. put it into the root folder
+ 
+ **OR**
+ 
 Replace `data/movies.json` with your own dataset in the same shape:
 
 ```json
