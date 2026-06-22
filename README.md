@@ -4,7 +4,7 @@ A static, fully client-side movie analytics dashboard with search and a
 rule-based recommendation engine. No backend, no build step — open it in a
 browser or publish it with GitHub Pages and anyone can use it immediately.
 
-**Live demo:** _add your GitHub Pages link here after publishing_
+**Live demo:** pojiifilms.pages.dev
 
 ## What's inside
 
@@ -19,7 +19,7 @@ browser or publish it with GitHub Pages and anyone can use it immediately.
 
 ## Run it locally
 run:
-' $env:OMDB_API_KEY="ffaf614b" '
+' $env:OMDB_API_KEY="your own OMDB API key here" '
 in the powershell to use OMDB API.
 
 run:
@@ -94,15 +94,6 @@ instead of silently dropped, so you can fix and retry those individually.
 
 Letterboxd star ratings (0.5-5.0) get converted to the dashboard's 0-10 scale
 automatically (`stars * 2`).
-
-## Adding the Power BI piece (optional)
-
-1. Build your report in Power BI Desktop from the same dataset (or
-   `data/movies.json` converted to CSV).
-2. In Power BI Desktop or the Power BI Service: **File → Publish to web**.
-3. Copy the generated `<iframe>` embed code.
-4. Paste it into the commented-out block in `index.html` under
-   "Power BI deep-dive (optional)".
 
 **Note:** Publish to web makes the report's underlying data public to anyone
 with the link. That's fine for a public movie dataset like this one — don't
