@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Movie Analytics Dashboard & Recommendation Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== LANDING / QUIZ PAGE ===================== -->
+<div id="landingPage" class="landing-page">
+  <div class="landing-inner">
+    <div class="eyebrow">Poji's Judgement Time</div>
+    <h1 class="title">WHAT TO WATCH<br><span>NEXT.</span></h1>
+    <p class="subtitle">Choose films you like and the system will recommend 10 more like them.</p>
+
+    <div class="quiz-card" id="quizCard">
+      <div class="quiz-meta">
+        <span class="mono" id="quizRound">Round 1 of 6</span>
+        <button class="skip-link" id="skipQuiz">Skip — browse everything →</button>
+      </div>
+      <div class="quiz-pair" id="quizPair"><!-- two poster-choice buttons injected here --></div>
+    </div>
+
+    <div class="quiz-results" id="quizResults" hidden>
+      <div class="section-head">
+        <h2>Picked for you - by Poji</h2>
+        <span class="num-label mono">based on your picks</span>
+      </div>
+      <div id="quizResultsList" class="results-grid"></div>
+      <div class="quiz-results-actions">
+        <button class="btn" id="enterDashboard">Explore the full dashboard →</button>
+        <button class="btn btn-ghost" id="retakeQuizLanding">Retake the taste test</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MAIN SITE ===================== -->
+<div id="mainSite" class="main-site hidden">
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="header-brand">
+        <span class="eyebrow-sm mono">FILM ANALYTICS</span>
+      </div>
+      <button class="btn btn-sm" id="retakeQuizHeader">Retake taste test</button>
+    </div>
+  </header>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="wrap">
+      <div class="stat-row" id="statRow">
+        <div class="stat"><div class="num" id="statCount">–</div><div class="label">Films Analyzed</div></div>
+        <div class="stat"><div class="num" id="statAvg">–</div><div class="label">Average Rating</div></div>
+        <div class="stat"><div class="num" id="statGenres">–</div><div class="label">Genres Covered</div></div>
+        <div class="stat"><div class="num" id="statYears">–</div><div class="label">Year Range</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filmstrip"></div>
+
+  <!-- ===================== SEARCH ===================== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Search a title</h2>
+        <span class="num-label mono">01</span>
+      </div>
+      <input id="searchInput" type="text" placeholder='Might not work due to limited API requests — try "Inception" or "Troll 2"' class="search-input">
+      <div id="searchResults"></div>
+    </div>
+  </section>
+
+  <div class="filmstrip"></div>
+
+  <!-- ===================== DASHBOARD ===================== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>The dashboard</h2>
+        <span class="num-label mono">02</span>
+      </div>
+      <p class="section-note">My Film-watching Analytics — generated from <code class="mono">my letterboxd dataset</code> using Javascript.</p>
+
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card">
+          <h3>Genres Preference</h3>
+          <canvas id="genreChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Rating Distribution</h3>
+          <canvas id="ratingChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Released Years</h3>
+          <canvas id="yearChart"></canvas>
+        </div>
+        <div class="card">
+          <h3>Rating vs. Box Office ($M)</h3>
+          <canvas id="scatterChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filmstrip"></div>
+
+  <!-- ===================== RECOMMENDER ===================== -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Find something to watch based on how much I rate them (/10)</h2>
+        <span class="num-label mono">03</span>
+      </div>
+      <p class="section-note">Set your preferences and the engine narrows the dataset in real time.</p>
+
+      <div class="rec-panel" style="margin-top:24px;">
+        <div class="controls controls-wide">
+          <div class="field">
+            <label for="fGenre">Genre</label>
+            <select id="fGenre"><option value="">Any genre</option></select>
+          </div>
+          <div class="field">
+            <label for="fDirector">Director</label>
+            <select id="fDirector"><option value="">Any director</option></select>
+          </div>
+          <div class="field">
+            <label for="fYear">Released after</label>
+            <select id="fYear">
+              <option value="0">Any year</option>
+              <option value="1990">1990+</option>
+              <option value="2000">2000+</option>
+              <option value="2010">2010+</option>
+              <option value="2015">2015+</option>
+              <option value="2020">2020+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fRating">Min rating</label>
+            <select id="fRating">
+              <option value="0">Any rating</option>
+              <option value="7">7.0+</option>
+              <option value="7.5">7.5+</option>
+              <option value="8">8.0+</option>
+              <option value="8.5">8.5+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fRuntime">Runtime</label>
+            <select id="fRuntime">
+              <option value="0">Any length</option>
+              <option value="short">Under 90 min</option>
+              <option value="medium">90–120 min</option>
+              <option value="long">120–150 min</option>
+              <option value="epic">150+ min</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fVotes">Popularity</label>
+            <select id="fVotes">
+              <option value="0">Any</option>
+              <option value="100000">100k+ votes</option>
+              <option value="500000">500k+ votes</option>
+              <option value="1000000">1M+ votes</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fSort">Sort by</label>
+            <select id="fSort">
+              <option value="rating">Top rated</option>
+              <option value="year">Newest</option>
+              <option value="revenue_million">Box office</option>
+              <option value="votes">Most popular</option>
+              <option value="runtime">Runtime</option>
+            </select>
+          </div>
+        </div>
+        <div class="rec-actions">
+          <button class="btn" id="recommendBtn">Find films</button>
+          <button class="btn btn-ghost" id="resetFilters">Reset</button>
+        </div>
+        <div id="results"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>Film Analytics Dashboard</span>
+      <button class="btn btn-ghost btn-sm" id="retakeQuizFooter">↑ Retake taste test</button>
+    </div>
+  </footer>
+
+</div><!-- /mainSite -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
