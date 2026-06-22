@@ -3,9 +3,8 @@
 A static, fully client-side movie analytics dashboard with search and a
 rule-based recommendation engine. No backend, no build step — open it in a
 browser or publish it with GitHub Pages and anyone can use it immediately.
-pojiifilms.pages.dev
 
-**Live demo:** 
+**Live demo:**  <a href="https://pojiifilms.pages.dev">pojiifilms.pages.dev</a>
 
 ## What's inside
 
