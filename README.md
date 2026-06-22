@@ -14,8 +14,6 @@ browser or publish it with GitHub Pages and anyone can use it immediately.
 - **Search** — instant title search over the dataset.
 - **Recommender** — filter by genre, year, and minimum rating; simple
   `Array.filter` logic, no ML required.
-- **Power BI slot** — an optional section to embed a published-to-web Power BI
-  report alongside the JS dashboard, if you want both.
 
 ## Run it locally
 run:
@@ -116,5 +114,4 @@ movie-analytics-dashboard/
 
 ## Tech stack
 
-HTML / CSS / JavaScript, Chart.js (via CDN), Python for offline data cleaning,
-optional Power BI for a deeper-dive report.
+HTML / CSS / JavaScript, Chart.js (via CDN), Python for offline data cleaning.
