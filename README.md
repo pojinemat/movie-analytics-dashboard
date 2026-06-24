@@ -1,6 +1,6 @@
 # Movie Analytics Dashboard & Recommendation Platform
 
-**Live demo:**  <a href="https://pojifilms.pages.dev">pojiifilms.pages.dev</a>
+**Live demo:**  <a href="https://pojifilms.pages.dev">pojifilms.pages.dev</a>
 
 ## What's inside
 
@@ -106,13 +106,12 @@ use it for anything sensitive.
 movie-analytics-dashboard/
 ├── index.html              # entry point — open this, or deploy as-is to Pages
 ├── style.css
+├── ratings.csv              # if you have a letterboxd account/data
 ├── script.js                # search, charts, recommender logic
 ├── data/
 │   └── movies.json          # sample dataset, swap in your own
 ├── scripts/
-│   └── data_cleaning.py      # CSV -> movies.json
-├── dashboard/                # optional: drop your .pbix source file here
-└── README.md
+    └── data_cleaning.py      # CSV -> movies.json
 ```
 
 ## Tech stack
